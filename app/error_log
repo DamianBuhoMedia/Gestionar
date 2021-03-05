@@ -1,0 +1,4 @@
+[27-Sep-2019 21:09:03 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Database\Eloquent\Model' not found in /home2/buhomedi/public_html/projects/gestionar/app/Cliente.php:7
+Stack trace:
+#0 {main}
+  thrown in /home2/buhomedi/public_html/projects/gestionar/app/Cliente.php on line 7
