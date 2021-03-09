@@ -11,6 +11,7 @@ class ServicioContratado extends Model
   protected $fillable = [
     'cliente__serviciocontratado',
     'servicio_serviciocontratado',
+    'sub_servicio_serviciocontratado',
     'alerta_serviciocontratado',
     'vencimiento_serviciocontratado',
     'observciones_serviciocontratado',

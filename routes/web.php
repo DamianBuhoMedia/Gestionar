@@ -129,3 +129,10 @@ Route::get('/auth0/login', function() {
             $redirectUri);
         return redirect($authorizeUrl);
     });
+
+
+
+
+// crea facturas
+Route::get('fc-create/{id}', 'FacturasController@create')->name('fc.create');
+Route::get('generate-pdf','HomeController@generatePDF');

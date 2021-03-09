@@ -38,15 +38,15 @@ function OnSelectChange(event) {
 	                            <div class="form-group">
 	                              <label class="control-label">Servicio</label>
 	                              <div class="">
-	                                <select  class="selectpicker form-control" id="servicios">
+	                                <select  class="selectpicker form-control" id="servicios"  name="servicio">
 	                                  @forelse($serviciosPadre as $itemservicios)
-	                                    <option data-price="{{$itemservicios['precio_subservicio']}}" value="{{$itemservicios['id_servicio']}}">{{$itemservicios['nombre_servicio']}}</option>
+	                                    <option data-price="{{$itemservicios['precio_subservicio']}}" value="{{$itemservicios['id_servicio']}}" >{{$itemservicios['nombre_servicio']}}</option>
 	                                    @empty
 	                                      No hay resultados
 	                                  @endforelse
 	                                </select>
 
-                                  <select class="form-control" id="client"  name="servicio" data-size="10" data-live-search="true" onchange="OnSelectChange(this)">
+                                  <select class="form-control" id="client"  name="subservicio" data-size="10" data-live-search="true" onchange="OnSelectChange(this)">
                                     <option value="">Seleccione Un Servicio</option>
                                   </select>
 	                              </div>

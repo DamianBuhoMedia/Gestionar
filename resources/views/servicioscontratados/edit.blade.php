@@ -42,7 +42,7 @@
                               <div class="form-group">
                                 <label class="control-label">Servicio</label>
                                 <div class="">
-                                  <select  class="selectpicker form-control" id="servicios">
+                                  <select  class="selectpicker form-control" id="servicios" name="servicio">
                                     <option value="{{$servicepadre[0]['id_servicio']}}">{{$servicepadre[0]['nombre_servicio']}}</option>
                                     @forelse($serviciosPadre as $itemservicios)
                                       <option value="{{$itemservicios['id_servicio']}}">{{$itemservicios['nombre_servicio']}}</option>
@@ -50,7 +50,7 @@
                                         No hay resultados
                                     @endforelse
                                   </select>
-                                  <select class="form-control" id="client"  name="servicio" data-size="10" data-live-search="true" onchange="OnSelectChange(this)">
+                                  <select class="form-control" id="client"  name="subservicio" data-size="10" data-live-search="true" onchange="OnSelectChange(this)">
                                       <option value="{{$servicioscontratados[0]['servicio_serviciocontratado']}}">{{$servicioscontratados[0]['nombre_subservicio']}}</option>
                                   </select>
                                 </div>
@@ -125,6 +125,7 @@
 															<button type="submit" class="btn btn-success">Actualizar</button>
 															<button type="reset" class="btn">Cancelar</button>
                               <button type="button" onclick="destroy()" class="btn btn-danger">Borrar</button>
+                              <a href="{{route('fc.create',$servicioscontratados[0]['id_serviciocontratado'])}}" class="btn btn-primary">Crear Factura</a>
 													</div>
 											</div>
 									</form>

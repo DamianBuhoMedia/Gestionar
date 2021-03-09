@@ -66,6 +66,7 @@ class ServicioContratadoController extends Controller
       ServicioContratado::create([
         'cliente__serviciocontratado' => request('cliente'),
         'servicio_serviciocontratado' => request('servicio'),
+        'sub_servicio_serviciocontratado' => request('subservicio'),
         'alerta_serviciocontratado' => request('alerta'),
         'vencimiento_serviciocontratado' => request('vencimiento'),
         'observciones_serviciocontratado' => request('observaciones'),
@@ -97,29 +98,32 @@ class ServicioContratadoController extends Controller
     public function edit($id)
     {
         $servicioscontratados = ServicioContratado::select(
-        'servicioscontratados.id_serviciocontratado',
-        'servicioscontratados.cliente__serviciocontratado',
-        'servicioscontratados.servicio_serviciocontratado',
-        'servicioscontratados.alerta_serviciocontratado',
-        'servicioscontratados.vencimiento_serviciocontratado',
-        'servicioscontratados.observciones_serviciocontratado',
-        'clientes.razonsocial_cliente',
-        'servicioscontratados.alertacliente_serviciocontratado',
-        'servicioscontratados.alertami_serviciocontratado',
-        'subservicios.nombre_subservicio',
-        'servicioscontratados.cotizacion_serviciocontratado'
+          'servicioscontratados.id_serviciocontratado',
+          'servicioscontratados.cliente__serviciocontratado',
+          'servicioscontratados.servicio_serviciocontratado',
+          'servicioscontratados.sub_servicio_serviciocontratado',
+          'servicioscontratados.alerta_serviciocontratado',
+          'servicioscontratados.vencimiento_serviciocontratado',
+          'servicioscontratados.observciones_serviciocontratado',
+          'servicioscontratados.alertacliente_serviciocontratado',
+          'servicioscontratados.alertami_serviciocontratado',
+          'servicioscontratados.cotizacion_serviciocontratado',
+          'clientes.razonsocial_cliente',
+          'subservicios.nombre_subservicio',
+          'servicios.nombre_servicio'
         )
         ->leftJoin('clientes', 'servicioscontratados.cliente__serviciocontratado', '=', 'clientes.id_cliente')
-        ->leftJoin('subservicios', 'servicioscontratados.servicio_serviciocontratado', '=', 'subservicios.id_subservicio')
+        ->leftJoin('subservicios', 'servicioscontratados.sub_servicio_serviciocontratado', '=', 'subservicios.id_subservicio')
+        ->leftJoin('servicios', 'servicioscontratados.servicio_serviciocontratado', '=', 'servicios.id_servicio')
         ->where('servicioscontratados.id_serviciocontratado', '=' , $id)
         ->get()
         ->toArray();
 
-        // return $servicioscontratados;
+         // return $servicioscontratados[0]['servicio_serviciocontratado'];
 
-        $idservice =  $servicioscontratados[0]['servicio_serviciocontratado'];
-        if($idservice){
-          $serviciospadreget = Subservicio::where('id_subservicio', '=', $idservice)->get();
+        $idsubservice =  $servicioscontratados[0]['sub_servicio_serviciocontratado'];
+        if($idsubservice){
+          $serviciospadreget = Subservicio::where('id_subservicio', '=', $idsubservice)->get();
           $idservicepadre =  $serviciospadreget[0]['idpadre_subservicio'];
           $servicepadre = Servicio::where('id_servicio', '=', $idservicepadre)->get();
           $clientes = Cliente::select('*')
@@ -131,8 +135,8 @@ class ServicioContratadoController extends Controller
           return view('servicioscontratados.edit', compact('clientes','servicios','servicioscontratados','serviciosPadre','servicepadre'));
         }
         else{
-          $serviciospadreget = "3";
-          $idservicepadre =  "3";
+          $serviciospadreget = $servicioscontratados[0]['servicio_serviciocontratado'];
+          $idservicepadre =  $servicioscontratados[0]['servicio_serviciocontratado'];
           $servicepadre = Servicio::where('id_servicio', '=', $idservicepadre)->get();
           $clientes = Cliente::select('*')
           ->where('clientes.potencial_cliente', '=' , '0')
@@ -158,6 +162,7 @@ class ServicioContratadoController extends Controller
       $servicioscontratados->update([
         'cliente__serviciocontratado' => request('cliente'),
         'servicio_serviciocontratado' => request('servicio'),
+        'sub_servicio_serviciocontratado' => request('subservicio'),
         'alerta_serviciocontratado' => request('alerta'),
         'vencimiento_serviciocontratado' => request('vencimiento'),
         'observciones_serviciocontratado' => request('observaciones'),

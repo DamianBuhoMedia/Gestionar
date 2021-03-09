@@ -23,6 +23,7 @@
 															<table class="table table-striped" id="table-example">
 																	<thead>
 																			<tr>
+																					<th class="text-center">N° de Orden</th>
 																					<th class="text-center">Fecha Alta</th>
 																					<th  class="text-center">Cliente</th>
 																					<th class="text-center">Servicio</th>
@@ -33,6 +34,7 @@
 																	<tbody align="center">
                                       @forelse($servicioscontratados as $servicioscontratadosItem)
 																			<tr class="odd gradeX">
+																					<td>{{$servicioscontratadosItem['id_serviciocontratado']}}</td>
 																					<td>{{$servicioscontratadosItem['created_at']}}</td>
 																					<td>{{$servicioscontratadosItem['razonsocial_cliente']}}</td>
 																					<td>{{$servicioscontratadosItem['nombre_subservicio']}}</td>
