@@ -3,9 +3,7 @@
 <div id="wrapper">
 		<div id="main">
 			<div id="content">
-
 					<div class="row">
-
 							<div class="col-lg-12">
 									<section class="panel">
 											<header class="panel-heading">
@@ -23,23 +21,122 @@
 															<table class="table table-striped" id="table-example">
 																	<thead>
 																			<tr>
-																					<th class="text-center">N° de Orden</th>
-																					<th class="text-center">Fecha Alta</th>
-																					<th  class="text-center">Cliente</th>
-																					<th class="text-center">Servicio</th>
-																					<th class="text-center">Alerta</th>
-																					<th class="text-center">Editar</th>
+																					<th  class="text-left">Cliente</th>
+																					<th class="text-left" width="350px" >Tramite</th>
+																					<th class="text-left">N° de Presupuesto</th>
+																					<th class="text-left">Monto</th>
+
+																					<th class="text-left">Cond. Pago</th>
+
+																					<th class="text-left">Pago 1</th>
+																					<th class="text-left">Pago 2</th>
+																					<th class="text-left">Pago 3</th>
+
+																					<th class="text-left">Alerta</th>
+																					<th class="text-left">Editar</th>
 																			</tr>
 																	</thead>
-																	<tbody align="center">
+																	<tbody align="left">
                                       @forelse($servicioscontratados as $servicioscontratadosItem)
 																			<tr class="odd gradeX">
-																					<td>{{$servicioscontratadosItem['id_serviciocontratado']}}</td>
-																					<td>{{$servicioscontratadosItem['created_at']}}</td>
-																					<td>{{$servicioscontratadosItem['razonsocial_cliente']}}</td>
-																					<td>{{$servicioscontratadosItem['nombre_subservicio']}}</td>
-																					<td class="center">{{$servicioscontratadosItem['alerta_serviciocontratado']}}</td>
-																					<td class="center"><a href="{{route('servicioscontratados.edit',$servicioscontratadosItem['id_serviciocontratado'])}}">Editar</a> </td>
+																					<td>{{$servicioscontratadosItem->razonsocial_cliente}}</td>
+																					<td>{{$servicioscontratadosItem->nombre_servicio}} <br> {{$servicioscontratadosItem->nombre_subservicio}}</td>
+																					<td>{{$servicioscontratadosItem->quote}}</td>
+																					<td>{{$servicioscontratadosItem->cotizacion_serviciocontratado}}</td>
+
+																					<td>
+																						{{$servicioscontratadosItem->paymentform1}}|{{$servicioscontratadosItem->paymentform2}}|{{$servicioscontratadosItem->paymentform3}}
+																					</td>
+																					<td>
+																									<a href="<?php
+																									if ($servicioscontratadosItem->serviciocontratado_pago1 == "0"){
+																										echo route('payment.create',[$servicioscontratadosItem->id_serviciocontratado,'1']);
+																									};
+																									if ($servicioscontratadosItem->serviciocontratado_pago1 == "1"){
+																										echo route('payment.edit',[$servicioscontratadosItem->id_serviciocontratado,'1']);
+																									};
+																									if ($servicioscontratadosItem->serviciocontratado_pago1 == "2"){
+																										echo route('payment.edit',[$servicioscontratadosItem->id_serviciocontratado,'1']);
+																									};
+																									?>" class="
+																								<?php
+																								if ($servicioscontratadosItem->serviciocontratado_pago1 == "0"){
+																									echo "btn btn-primary";
+																								};
+
+																								if ($servicioscontratadosItem->serviciocontratado_pago1 == "1"){
+																									echo "btn btn-danger";
+																								};
+
+																								if ($servicioscontratadosItem->serviciocontratado_pago1 == "2"){
+																									echo "btn btn-success";
+																								};
+																								?>
+																							">
+																							{{ (($servicioscontratadosItem->cotizacion_serviciocontratado) * $servicioscontratadosItem->paymentform1 ) / 100 }}
+																						</a>
+																					</td>
+																					<td>
+																									<a href="<?php
+																									if ($servicioscontratadosItem->serviciocontratado_pago2 == "0"){
+																										echo route('payment.create',[$servicioscontratadosItem->id_serviciocontratado,'2']);
+																									};
+																									if ($servicioscontratadosItem->serviciocontratado_pago2 == "1"){
+																										echo route('payment.edit',[$servicioscontratadosItem->id_serviciocontratado,'2']);
+																									};
+																									if ($servicioscontratadosItem->serviciocontratado_pago2 == "2"){
+																										echo route('payment.edit',[$servicioscontratadosItem->id_serviciocontratado,'2']);
+																									};
+																									?>" class="
+																								<?php
+																								if ($servicioscontratadosItem->serviciocontratado_pago2 == "0"){
+																									echo "btn btn-primary";
+																								};
+
+																								if ($servicioscontratadosItem->serviciocontratado_pago2 == "1"){
+																									echo "btn btn-danger";
+																								};
+
+																								if ($servicioscontratadosItem->serviciocontratado_pago2 == "2"){
+																									echo "btn btn-success";
+																								};
+																								?>
+																							">
+																							{{ (($servicioscontratadosItem->cotizacion_serviciocontratado) * $servicioscontratadosItem->paymentform2 ) / 100 }}
+																						</a>
+																					</td>
+																					<td>
+																									<a href="<?php
+																									if ($servicioscontratadosItem->serviciocontratado_pago3 == "0"){
+																										echo route('payment.create',[$servicioscontratadosItem->id_serviciocontratado,'3']);
+																									};
+																									if ($servicioscontratadosItem->serviciocontratado_pago3 == "1"){
+																										echo route('payment.edit',[$servicioscontratadosItem->id_serviciocontratado,'3']);
+																									};
+																									if ($servicioscontratadosItem->serviciocontratado_pago3 == "2"){
+																										echo route('payment.edit',[$servicioscontratadosItem->id_serviciocontratado,'3']);
+																									};
+																									?>" class="
+																								<?php
+																								if ($servicioscontratadosItem->serviciocontratado_pago3 == "0"){
+																									echo "btn btn-primary";
+																								};
+
+																								if ($servicioscontratadosItem->serviciocontratado_pago3 == "1"){
+																									echo "btn btn-danger";
+																								};
+
+																								if ($servicioscontratadosItem->serviciocontratado_pago3 == "2"){
+																									echo "btn btn-success";
+																								};
+																								?>
+																							">
+																							{{ (($servicioscontratadosItem->cotizacion_serviciocontratado) * $servicioscontratadosItem->paymentform3 ) / 100 }}
+																						</a>
+																					</td>
+
+																					<td class="left">{{$servicioscontratadosItem->alerta_serviciocontratado}}</td>
+																					<td class="left"><a href="{{route('servicioscontratados.edit',$servicioscontratadosItem->id_serviciocontratado)}}">Editar</a> </td>
 																			</tr>
                                       @empty
                                         No hay resultados

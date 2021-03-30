@@ -6,6 +6,7 @@ use App\ServicioContratado;
 use App\Cliente;
 use App\Servicio;
 use App\Subservicio;
+use DB;
 
 use Illuminate\Http\Request;
 
@@ -19,23 +20,44 @@ class ServicioContratadoController extends Controller
     public function index()
     {
 
-      $servicioscontratados = ServicioContratado::select(
-        'servicioscontratados.id_serviciocontratado',
-        'servicioscontratados.cliente__serviciocontratado',
-        'servicioscontratados.servicio_serviciocontratado',
-        'servicioscontratados.alerta_serviciocontratado',
-        'servicioscontratados.vencimiento_serviciocontratado',
-        'servicioscontratados.observciones_serviciocontratado',
-        'clientes.razonsocial_cliente',
-        'subservicios.nombre_subservicio',
-        'servicioscontratados.alertacliente_serviciocontratado',
-        'servicioscontratados.alertami_serviciocontratado',
-        'servicioscontratados.created_at'
-        )
-        ->leftJoin('clientes', 'servicioscontratados.cliente__serviciocontratado', '=', 'clientes.id_cliente')
-        ->leftJoin('subservicios', 'servicioscontratados.servicio_serviciocontratado', '=', 'subservicios.id_subservicio')
-        ->get()
-        ->toArray();
+      $servicioscontratados = DB::select(
+        DB::raw("SELECT
+        servicioscontratados.id_serviciocontratado,
+        servicioscontratados.quote,
+        servicioscontratados.cliente__serviciocontratado,
+        servicioscontratados.servicio_serviciocontratado,
+        servicioscontratados.sub_servicio_serviciocontratado,
+        servicioscontratados.servicio_detalle,
+        servicioscontratados.alerta_serviciocontratado,
+        servicioscontratados.vencimiento_serviciocontratado,
+        servicioscontratados.observciones_serviciocontratado,
+        servicioscontratados.alertacliente_serviciocontratado,
+        servicioscontratados.alertami_serviciocontratado,
+        servicioscontratados.cotizacion_serviciocontratado,
+        servicioscontratados.cotizacion_aprobado,
+        servicioscontratados.updated_at,
+        servicioscontratados.created_at,
+        clientes.razonsocial_cliente,
+        servicios.nombre_servicio,
+        subservicios.nombre_subservicio,
+        quotes.paymentform1,
+        quotes.paymentform2,
+        quotes.paymentform3,
+        servicioscontratados.serviciocontratado_pago1,
+        servicioscontratados.serviciocontratado_pago2,
+        servicioscontratados.serviciocontratado_pago3,
+        servicioscontratados.facturanumero,
+        servicioscontratados.fechafactura
+        FROM
+        servicioscontratados
+        LEFT JOIN clientes ON servicioscontratados.cliente__serviciocontratado = clientes.id_cliente
+        LEFT JOIN servicios ON servicioscontratados.servicio_serviciocontratado = servicios.id_servicio
+        LEFT JOIN subservicios ON servicioscontratados.sub_servicio_serviciocontratado = subservicios.id_subservicio
+        LEFT JOIN quotes ON servicioscontratados.quote = quotes.id
+        WHERE
+        servicioscontratados.cotizacion_aprobado = 1
+        "));
+
         return view('servicioscontratados.index', compact('servicioscontratados'));
     }
 
@@ -101,6 +123,7 @@ class ServicioContratadoController extends Controller
           'servicioscontratados.id_serviciocontratado',
           'servicioscontratados.cliente__serviciocontratado',
           'servicioscontratados.servicio_serviciocontratado',
+          'servicioscontratados.servicio_detalle',
           'servicioscontratados.sub_servicio_serviciocontratado',
           'servicioscontratados.alerta_serviciocontratado',
           'servicioscontratados.vencimiento_serviciocontratado',
@@ -108,6 +131,8 @@ class ServicioContratadoController extends Controller
           'servicioscontratados.alertacliente_serviciocontratado',
           'servicioscontratados.alertami_serviciocontratado',
           'servicioscontratados.cotizacion_serviciocontratado',
+          'servicioscontratados.fechafactura',
+          'servicioscontratados.facturanumero',
           'clientes.razonsocial_cliente',
           'subservicios.nombre_subservicio',
           'servicios.nombre_servicio'
@@ -159,16 +184,36 @@ class ServicioContratadoController extends Controller
     public function update(Request $request, $id)
     {
       $servicioscontratados = ServicioContratado::findorfail($id);
+      $quotenumber = $servicioscontratados->quote;
+      $facturanumero = request('facturanumero');
+      $facturafecha = request('fechafactura');
+
+      $updateservicedata = DB::select(
+        DB::raw("
+          UPDATE servicioscontratados
+          SET facturanumero = '$facturanumero', fechafactura=' $facturafecha'
+          WHERE quote = $quotenumber;
+      "));
+
+      $updatequotedata = DB::select(
+        DB::raw("
+          UPDATE quotes
+          SET facturanumero = '$facturanumero', fechafactura=' $facturafecha'
+          WHERE id = $quotenumber;
+      "));
+
+
       $servicioscontratados->update([
         'cliente__serviciocontratado' => request('cliente'),
         'servicio_serviciocontratado' => request('servicio'),
         'sub_servicio_serviciocontratado' => request('subservicio'),
+        'servicio_detalle' => request('servicio_detalle'),
         'alerta_serviciocontratado' => request('alerta'),
         'vencimiento_serviciocontratado' => request('vencimiento'),
         'observciones_serviciocontratado' => request('observaciones'),
         'alertacliente_serviciocontratado' => request('alertarme'),
         'cotizacion_serviciocontratado' => request('cotizacion'),
-        'alertami_serviciocontratado' => request('alertar')
+        'alertami_serviciocontratado' => request('alertar'),
       ]);
 
       return redirect()->route('servicioscontratados.edit', $servicioscontratados);

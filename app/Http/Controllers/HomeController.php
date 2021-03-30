@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PDF;
+use DB;
 
 class HomeController extends Controller
 {
@@ -27,12 +28,16 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function generatePDF()
+    public function printquote($id)
     {
-        $data = ['title' => 'Welcome to HDTuto.com'];
-        $pdf = PDF::loadView('pdfs.myPDF', $data);
+       // This  $data array will be passed to our PDF blade
+       $data = [
+          'title' => 'First PDF for Medium',
+          'heading' => 'Hello from 99Points.info',
+          'content' => 'Lorem Ipsum is simply dummy text of the pri'];
 
-        return $pdf->download('itsolutionstuff.pdf');
+        $pdf = PDF::loadView('pdf_view', $data);
+        return $pdf->download('medium.pdf');
     }
 
 }

@@ -131,8 +131,30 @@ Route::get('/auth0/login', function() {
     });
 
 
+// IMPRIME
+Route::get('printquote/{id}', 'HomeController@index')->name('printquote');
 
 
-// crea facturas
-Route::get('fc-create/{id}', 'FacturasController@create')->name('fc.create');
-Route::get('generate-pdf','HomeController@generatePDF');
+
+// crea presupuestos
+Route::get('quotes', 'QuotesController@index')->name('quote.index');
+Route::get('indexapproved', 'QuotesController@indexapproved')->name('quote.indexapproved');
+Route::get('quoteadd', 'QuotesController@create')->name('quote.create');
+Route::get('quoteedit/{id}', 'QuotesController@edit')->name('quote.edit');
+Route::get('quoteshow/{id}', 'QuotesController@show')->name('quote.show');
+Route::post('/quotestore', 'QuotesController@store')->name('quote.store');
+Route::patch('/quotestore/{id}','QuotesController@update')->name('quote.update');
+Route::get('createfc/{id}', 'QuotesController@createfc')->name('createfc');
+
+// crea pago
+Route::get('/payment/{id}/{etapa}', 'PaymentController@create')->name('payment.create');
+Route::get('/paymentedit/{id}/{etapa}', 'PaymentController@edit')->name('payment.edit');
+Route::patch('/paymenteupdate/{id}/{etapa}', 'PaymentController@update')->name('payment.update');
+Route::post('paymentstore/','PaymentController@store')->name('payment.store');
+
+
+
+
+Route::get("/page", function(){
+   return View::make("pdfs.quote");
+});

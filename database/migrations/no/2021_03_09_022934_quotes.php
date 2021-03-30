@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Facturas extends Migration
+class Quotes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class Facturas extends Migration
      */
     public function up()
     {
-      Schema::create('facturas', function (Blueprint $table) {
+      Schema::create('quotes', function (Blueprint $table) {
           $table->bigIncrements('id');
           $table->string('serviceid');
+          $table->string('subserviceid');
           $table->string('clientid');
           $table->string('amount');
           $table->string('observation');
@@ -25,6 +26,7 @@ class Facturas extends Migration
           $table->string('paymentform1');
           $table->string('paymentform2');
           $table->string('paymentform3');
+          $table->string('facturado');
           $table->timestamps();
       });
     }

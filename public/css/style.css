@@ -9485,3 +9485,8 @@ a.add {
 .dropdown-toggle:after {
     border: none;
 }
+
+
+.btn-group.bootstrap-select.form-control {
+    margin-bottom: 10px;
+}

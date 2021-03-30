@@ -4,13 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Facturas extends Model
+class Quotes extends Model
 {
-  protected $table = 'facturas';
+  protected $table = 'quotes';
   protected $primaryKey = 'id';
   protected $fillable = [
     'id',
     'serviceid',
+    'subserviceid',
     'clientid',
     'amount',
     'observation',
@@ -21,6 +22,7 @@ class Facturas extends Model
     'paymentform2',
     'paymentform3',
     'created_at',
-    'updated_at'
+    'updated_at',
+    'facturado'
 ];
 }

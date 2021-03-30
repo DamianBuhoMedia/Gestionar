@@ -20,7 +20,7 @@
                     @csrf @method('PATCH')
 										<section class="panel">
 												<header class="panel-heading">
-														<h2> Nuevo Servicio Contratado </h2>
+														<h2>Servicio Contratado </h2>
 														<label class="color">Datos del cliente y servicio</label>
 												</header>
 												<div class="panel-body align-lg-center">
@@ -51,12 +51,9 @@
                                     @endforelse
                                   </select>
                                   <select class="form-control" id="client"  name="subservicio" data-size="10" data-live-search="true" onchange="OnSelectChange(this)">
-                                      <option value="{{$servicioscontratados[0]['servicio_serviciocontratado']}}">{{$servicioscontratados[0]['nombre_subservicio']}}</option>
+                                      <option value="{{$servicioscontratados[0]['sub_servicio_serviciocontratado']}}">{{$servicioscontratados[0]['nombre_subservicio']}}</option>
                                   </select>
                                 </div>
-
-
-
 
 
                               </div>
@@ -125,7 +122,6 @@
 															<button type="submit" class="btn btn-success">Actualizar</button>
 															<button type="reset" class="btn">Cancelar</button>
                               <button type="button" onclick="destroy()" class="btn btn-danger">Borrar</button>
-                              <a href="{{route('fc.create',$servicioscontratados[0]['id_serviciocontratado'])}}" class="btn btn-primary">Crear Factura</a>
 													</div>
 											</div>
 									</form>
