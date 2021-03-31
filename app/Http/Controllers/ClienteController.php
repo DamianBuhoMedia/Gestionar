@@ -8,6 +8,7 @@ use App\Iva;
 use App\Iibb;
 use App\Nota;
 use App\ServicioContratado;
+use DB;
 
 use Illuminate\Http\Request;
 
@@ -147,20 +148,45 @@ class ClienteController extends Controller
 
       // Datos de los serviicos contratados
 
-      $servicioscontratados = ServicioContratado::select(
-        'servicioscontratados.id_serviciocontratado',
-        'servicioscontratados.cliente__serviciocontratado',
-        'servicioscontratados.alerta_serviciocontratado',
-        'servicioscontratados.vencimiento_serviciocontratado',
-        'servicioscontratados.observciones_serviciocontratado',
-        'servicioscontratados.cotizacion_serviciocontratado',
-        'servicioscontratados.created_at',
-        'subservicios.nombre_subservicio'
-      )
-      ->leftJoin('subservicios', 'servicioscontratados.servicio_serviciocontratado', '=', 'subservicios.id_subservicio')
-      ->where('servicioscontratados.cliente__serviciocontratado', '=' , $id)
-      ->get()
-      ->toArray();
+      $servicioscontratados = DB::select(
+        DB::raw("SELECT
+        servicioscontratados.id_serviciocontratado,
+        servicioscontratados.quote,
+        servicioscontratados.cliente__serviciocontratado,
+        servicioscontratados.servicio_serviciocontratado,
+        servicioscontratados.sub_servicio_serviciocontratado,
+        servicioscontratados.servicio_detalle,
+        servicioscontratados.alerta_serviciocontratado,
+        servicioscontratados.vencimiento_serviciocontratado,
+        servicioscontratados.observciones_serviciocontratado,
+        servicioscontratados.alertacliente_serviciocontratado,
+        servicioscontratados.alertami_serviciocontratado,
+        servicioscontratados.cotizacion_serviciocontratado,
+        servicioscontratados.cotizacion_aprobado,
+        servicioscontratados.updated_at,
+        servicioscontratados.created_at,
+        clientes.razonsocial_cliente,
+        servicios.nombre_servicio,
+        subservicios.nombre_subservicio,
+        quotes.paymentform1,
+        quotes.paymentform2,
+        quotes.paymentform3,
+        servicioscontratados.serviciocontratado_pago1,
+        servicioscontratados.serviciocontratado_pago2,
+        servicioscontratados.serviciocontratado_pago3,
+        servicioscontratados.facturanumero,
+        servicioscontratados.fechafactura
+        FROM
+        servicioscontratados
+        LEFT JOIN clientes ON servicioscontratados.cliente__serviciocontratado = clientes.id_cliente
+        LEFT JOIN servicios ON servicioscontratados.servicio_serviciocontratado = servicios.id_servicio
+        LEFT JOIN subservicios ON servicioscontratados.sub_servicio_serviciocontratado = subservicios.id_subservicio
+        LEFT JOIN quotes ON servicioscontratados.quote = quotes.id
+        WHERE
+        servicioscontratados.cotizacion_aprobado = 1
+				AND
+				cliente__serviciocontratado = $id
+        "));
 
       $nota = Nota::select('*')
       ->where('notas.cliente_nota', '=' , $id)

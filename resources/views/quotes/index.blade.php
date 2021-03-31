@@ -25,7 +25,6 @@
 																					<th class="text-center">N° de Presupuesto</th>
 																					<th class="text-center">Fecha Alta</th>
 																					<th  class="text-center">Cliente</th>
-																					<th class="text-center">Monto</th>
                                           <th class="text-center">Editar</th>
 																			</tr>
 																	</thead>
@@ -35,7 +34,6 @@
 																					<td>{{$quotesItem->id}}</td>
 																					<td>{{$quotesItem->created_at}}</td>
 																					<td>{{$quotesItem->razonsocial_cliente}}</td>
-                                          <td>{{$quotesItem->amount}}</td>
 																					<td class="center"><a href="{{route('quote.edit',$quotesItem->id)}}">Editar</a> </td>
 																			</tr>
                                       @empty

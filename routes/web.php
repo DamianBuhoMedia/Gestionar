@@ -132,7 +132,7 @@ Route::get('/auth0/login', function() {
 
 
 // IMPRIME
-Route::get('printquote/{id}', 'HomeController@index')->name('printquote');
+Route::get('printquote/{id}', 'HomeController@printquote')->name('printquote');
 
 
 

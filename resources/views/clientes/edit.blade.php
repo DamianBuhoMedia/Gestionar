@@ -10,8 +10,8 @@
 				<div id="content">
 
 						<div class="row">
-								<div class="col-lg-2"></div>
-								<div class="col-lg-7">
+								<div class="col-lg-1"></div>
+								<div class="col-lg-8">
                   <div class="tabbable">
                       <ul class="nav nav-tabs">
                           <li class="active"><a href="#datos" data-toggle="tab">Datos del Cliente</a></li>
@@ -474,33 +474,131 @@
 
                              <div class="panel-body">
                                  <form>
-                                     <table class="table table-striped" id="table-example">
-                                         <thead>
-                                             <tr>
-                                                 <th  class="text-center">Creado el:</th>
-                                                 <th class="text-center">Servicio</th>
-                                                 <th class="text-center">Alerta</th>
-                                                 <th class="text-center">Vencimiento</th>
-                                                 <th class="text-center">Cotizacion</th>
-                                                 <th class="text-center">Ver</th>
-                                             </tr>
-                                         </thead>
-                                         <tbody align="center">
-                                           @forelse($servicioscontratados as $itemservicioscontratados)
-                                           <tr class="odd gradeX">
-                                               <td class="center">{{$itemservicioscontratados['created_at']}}</td>
-                                               <td class="center">{{$itemservicioscontratados['nombre_subservicio']}}</td>
-                                               <td class="center">{{$itemservicioscontratados['alerta_serviciocontratado']}}</td>
-                                               <td class="center">{{$itemservicioscontratados['vencimiento_serviciocontratado']}} </td>
-                                               <td class="center">{{$itemservicioscontratados['cotizacion_serviciocontratado']}} </td>
-                                               <td class="center"><a href="{{route('servicioscontratados.edit',$itemservicioscontratados['id_serviciocontratado'])}}">Editar</a> </td>
-                                           </tr>
-                                           @empty
-                                           No hay resultados aun
-                                           @endforelse
+                                   <table class="table table-striped" id="table-example">
+                                      <thead>
+                                          <tr>
+                                              <th  class="text-left">Cliente</th>
+                                              <th class="text-left" width="350px" >Tramite</th>
+                                              <th class="text-left">N° de Presupuesto</th>
+                                              <th class="text-left">Monto</th>
 
-                                         </tbody>
-                                     </table>
+                                              <th class="text-left">Cond. Pago</th>
+
+                                              <th class="text-left">Pago 1</th>
+                                              <th class="text-left">Pago 2</th>
+                                              <th class="text-left">Pago 3</th>
+
+                                              <th class="text-left">Alerta</th>
+                                              <th class="text-left">Ver</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody align="left">
+                                           @forelse($servicioscontratados as $servicioscontratadosItem)
+                                          <tr class="odd gradeX">
+                                              <td>{{$servicioscontratadosItem->razonsocial_cliente}}</td>
+                                              <td>{{$servicioscontratadosItem->nombre_servicio}} <br> {{$servicioscontratadosItem->nombre_subservicio}}</td>
+                                              <td>{{$servicioscontratadosItem->quote}}</td>
+                                              <td>{{$servicioscontratadosItem->cotizacion_serviciocontratado}}</td>
+
+                                              <td>
+                                                {{$servicioscontratadosItem->paymentform1}}|{{$servicioscontratadosItem->paymentform2}}|{{$servicioscontratadosItem->paymentform3}}
+                                              </td>
+                                              <td>
+                                                      <a href="<?php
+                                                      if ($servicioscontratadosItem->serviciocontratado_pago1 == "0"){
+                                                        echo route('payment.create',[$servicioscontratadosItem->id_serviciocontratado,'1']);
+                                                      };
+                                                      if ($servicioscontratadosItem->serviciocontratado_pago1 == "1"){
+                                                        echo route('payment.edit',[$servicioscontratadosItem->id_serviciocontratado,'1']);
+                                                      };
+                                                      if ($servicioscontratadosItem->serviciocontratado_pago1 == "2"){
+                                                        echo route('payment.edit',[$servicioscontratadosItem->id_serviciocontratado,'1']);
+                                                      };
+                                                      ?>" class="
+                                                    <?php
+                                                    if ($servicioscontratadosItem->serviciocontratado_pago1 == "0"){
+                                                      echo "btn btn-primary";
+                                                    };
+
+                                                    if ($servicioscontratadosItem->serviciocontratado_pago1 == "1"){
+                                                      echo "btn btn-danger";
+                                                    };
+
+                                                    if ($servicioscontratadosItem->serviciocontratado_pago1 == "2"){
+                                                      echo "btn btn-success";
+                                                    };
+                                                    ?>
+                                                  ">
+                                                  {{ (($servicioscontratadosItem->cotizacion_serviciocontratado) * $servicioscontratadosItem->paymentform1 ) / 100 }}
+                                                </a>
+                                              </td>
+                                              <td>
+                                                      <a href="<?php
+                                                      if ($servicioscontratadosItem->serviciocontratado_pago2 == "0"){
+                                                        echo route('payment.create',[$servicioscontratadosItem->id_serviciocontratado,'2']);
+                                                      };
+                                                      if ($servicioscontratadosItem->serviciocontratado_pago2 == "1"){
+                                                        echo route('payment.edit',[$servicioscontratadosItem->id_serviciocontratado,'2']);
+                                                      };
+                                                      if ($servicioscontratadosItem->serviciocontratado_pago2 == "2"){
+                                                        echo route('payment.edit',[$servicioscontratadosItem->id_serviciocontratado,'2']);
+                                                      };
+                                                      ?>" class="
+                                                    <?php
+                                                    if ($servicioscontratadosItem->serviciocontratado_pago2 == "0"){
+                                                      echo "btn btn-primary";
+                                                    };
+
+                                                    if ($servicioscontratadosItem->serviciocontratado_pago2 == "1"){
+                                                      echo "btn btn-danger";
+                                                    };
+
+                                                    if ($servicioscontratadosItem->serviciocontratado_pago2 == "2"){
+                                                      echo "btn btn-success";
+                                                    };
+                                                    ?>
+                                                  ">
+                                                  {{ (($servicioscontratadosItem->cotizacion_serviciocontratado) * $servicioscontratadosItem->paymentform2 ) / 100 }}
+                                                </a>
+                                              </td>
+                                              <td>
+                                                      <a href="<?php
+                                                      if ($servicioscontratadosItem->serviciocontratado_pago3 == "0"){
+                                                        echo route('payment.create',[$servicioscontratadosItem->id_serviciocontratado,'3']);
+                                                      };
+                                                      if ($servicioscontratadosItem->serviciocontratado_pago3 == "1"){
+                                                        echo route('payment.edit',[$servicioscontratadosItem->id_serviciocontratado,'3']);
+                                                      };
+                                                      if ($servicioscontratadosItem->serviciocontratado_pago3 == "2"){
+                                                        echo route('payment.edit',[$servicioscontratadosItem->id_serviciocontratado,'3']);
+                                                      };
+                                                      ?>" class="
+                                                    <?php
+                                                    if ($servicioscontratadosItem->serviciocontratado_pago3 == "0"){
+                                                      echo "btn btn-primary";
+                                                    };
+
+                                                    if ($servicioscontratadosItem->serviciocontratado_pago3 == "1"){
+                                                      echo "btn btn-danger";
+                                                    };
+
+                                                    if ($servicioscontratadosItem->serviciocontratado_pago3 == "2"){
+                                                      echo "btn btn-success";
+                                                    };
+                                                    ?>
+                                                  ">
+                                                  {{ (($servicioscontratadosItem->cotizacion_serviciocontratado) * $servicioscontratadosItem->paymentform3 ) / 100 }}
+                                                </a>
+                                              </td>
+
+                                              <td class="left">{{$servicioscontratadosItem->alerta_serviciocontratado}}</td>
+                                              <td class="left"><a href="{{route('servicioscontratados.edit',$servicioscontratadosItem->id_serviciocontratado)}}">Ver</a> </td>
+                                          </tr>
+                                           @empty
+                                             No hay resultados
+                                           @endforelse
+                                      </tbody>
+                                  </table>
                                  </form>
                              </div>
                           </div>
