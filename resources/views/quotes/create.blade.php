@@ -403,7 +403,7 @@ function OnSelectChange10(event) {
 			$("#servicios").change(function(){
 					var selected = $(this).children("option:selected").val();
 					var type = $(this).val();
-					$.get('../getsubservicio/'+type, function(data){
+					$.get('http://websites.ravendev.tech/gestionar/public/getsubservicio/'+type, function(data){
 							console.log(data);
 							var producto_select = '<option value="">Seleccione una opcion</option>'
 								for (var i=0; i<data.length;i++)
@@ -417,7 +417,7 @@ function OnSelectChange10(event) {
       $("#servicios2").change(function(){
 					var selected = $(this).children("option:selected").val();
 					var type = $(this).val();
-					$.get('../getsubservicio/'+type, function(data){
+					$.get('http://websites.ravendev.tech/gestionar/public/getsubservicio/'+type, function(data){
 							console.log(data);
 							var producto_select = '<option value="">Seleccione una opcion</option>'
 								for (var i=0; i<data.length;i++)
@@ -429,7 +429,7 @@ function OnSelectChange10(event) {
       $("#servicios3").change(function(){
 					var selected = $(this).children("option:selected").val();
 					var type = $(this).val();
-					$.get('../getsubservicio/'+type, function(data){
+					$.get('http://websites.ravendev.tech/gestionar/public/getsubservicio/'+type, function(data){
 							console.log(data);
 							var producto_select = '<option value="">Seleccione una opcion</option>'
 								for (var i=0; i<data.length;i++)
@@ -441,7 +441,7 @@ function OnSelectChange10(event) {
       $("#servicios4").change(function(){
           var selected = $(this).children("option:selected").val();
           var type = $(this).val();
-          $.get('../getsubservicio/'+type, function(data){
+          $.get('http://websites.ravendev.tech/gestionar/public/getsubservicio/'+type, function(data){
               console.log(data);
               var producto_select = '<option value="">Seleccione una opcion</option>'
                 for (var i=0; i<data.length;i++)
@@ -453,7 +453,7 @@ function OnSelectChange10(event) {
       $("#servicios5").change(function(){
           var selected = $(this).children("option:selected").val();
           var type = $(this).val();
-          $.get('../getsubservicio/'+type, function(data){
+          $.get('http://websites.ravendev.tech/gestionar/public/getsubservicio/'+type, function(data){
               console.log(data);
               var producto_select = '<option value="">Seleccione una opcion</option>'
                 for (var i=0; i<data.length;i++)
@@ -465,7 +465,7 @@ function OnSelectChange10(event) {
       $("#servicios6").change(function(){
           var selected = $(this).children("option:selected").val();
           var type = $(this).val();
-          $.get('../getsubservicio/'+type, function(data){
+          $.get('http://websites.ravendev.tech/gestionar/public/getsubservicio/'+type, function(data){
               console.log(data);
               var producto_select = '<option value="">Seleccione una opcion</option>'
                 for (var i=0; i<data.length;i++)
@@ -477,7 +477,7 @@ function OnSelectChange10(event) {
       $("#servicios7").change(function(){
           var selected = $(this).children("option:selected").val();
           var type = $(this).val();
-          $.get('../getsubservicio/'+type, function(data){
+          $.get('http://websites.ravendev.tech/gestionar/public/getsubservicio/'+type, function(data){
               console.log(data);
               var producto_select = '<option value="">Seleccione una opcion</option>'
                 for (var i=0; i<data.length;i++)
@@ -489,7 +489,7 @@ function OnSelectChange10(event) {
       $("#servicios8").change(function(){
           var selected = $(this).children("option:selected").val();
           var type = $(this).val();
-          $.get('../getsubservicio/'+type, function(data){
+          $.get('http://websites.ravendev.tech/gestionar/public/getsubservicio/'+type, function(data){
               console.log(data);
               var producto_select = '<option value="">Seleccione una opcion</option>'
                 for (var i=0; i<data.length;i++)
@@ -501,7 +501,7 @@ function OnSelectChange10(event) {
       $("#servicios9").change(function(){
           var selected = $(this).children("option:selected").val();
           var type = $(this).val();
-          $.get('../getsubservicio/'+type, function(data){
+          $.get('http://websites.ravendev.tech/gestionar/public/getsubservicio/'+type, function(data){
               console.log(data);
               var producto_select = '<option value="">Seleccione una opcion</option>'
                 for (var i=0; i<data.length;i++)
@@ -513,7 +513,7 @@ function OnSelectChange10(event) {
       $("#servicios10").change(function(){
           var selected = $(this).children("option:selected").val();
           var type = $(this).val();
-          $.get('../getsubservicio/'+type, function(data){
+          $.get('http://websites.ravendev.tech/gestionar/public/getsubservicio/'+type, function(data){
               console.log(data);
               var producto_select = '<option value="">Seleccione una opcion</option>'
                 for (var i=0; i<data.length;i++)
