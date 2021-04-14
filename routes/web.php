@@ -154,6 +154,11 @@ Route::post('paymentstore/','PaymentController@store')->name('payment.store');
 
 
 
+// Tramites nacion
+Route::get('nacion', 'TramitesNacionController@index')->name('nacion.index');
+
+
+
 
 Route::get("/page", function(){
    return View::make("pdfs.quote");

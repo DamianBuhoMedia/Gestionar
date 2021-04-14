@@ -15,6 +15,7 @@
         <li><a href="{{route('proveedores.index')}}"><i class="icon  fa fa-user"></i>Proveedores</a></li>
         <li><a href="{{route('servicios.index')}}"><i class="icon  fa fa-paperclip"></i>Servicios</a></li>
         <li><a href="{{route('subservicios.index')}}"><i class="icon  fa fa-paperclip"></i>Sub Servicios</a></li>
+        <li><a href="{{route('nacion.index')}}"><i class="icon  fa fa-paperclip"></i>Tramites Nacion</a></li>
         <li><a href="{{route('agenda.index')}}"><i class="icon  fa fa-calendar"></i>Agenda</a></li>
     </ul>
 </nav>
