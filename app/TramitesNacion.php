@@ -15,6 +15,7 @@ class TramitesNacion extends Model
                           'expediente',
                           'tramite',
                           'inicio',
+                          'quote',
                           'c1',
                           'c2',
                           'c3',

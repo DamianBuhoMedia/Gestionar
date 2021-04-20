@@ -52,7 +52,7 @@
 																										<td>{{$nacionItem->inicio}}</td>
 																										<td>{{$nacionItem->c1}}</td>
 																										<td>{{$nacionItem->id}}</td>
-																										<td class="center"><a href="{{route('quote.edit',$nacionItem->id)}}">Editar</a> </td>
+																										<td class="center"><a href="{{route('nacion.edit',$nacionItem->id)}}">Editar</a> </td>
 																								</tr>
 																								@empty
 																									No hay resultados

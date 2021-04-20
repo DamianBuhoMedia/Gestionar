@@ -10,6 +10,7 @@ use App\Subservicio;
 use App\Quotes;
 use DB;
 use App\Potencial;
+use App\TramitesNacion ;
 
 class QuotesController extends Controller
 {
@@ -313,7 +314,6 @@ class QuotesController extends Controller
           'serviciocontratado_pago3' => "0",
         ]);
       }
-
 
       return redirect()->route('quote.index');
     }
@@ -640,6 +640,12 @@ class QuotesController extends Controller
              WHERE id_cliente = $idcliente;
             "));
          }
+
+
+         TramitesNacion::create([
+           'quote' => $id
+         ]);
+
 
         return redirect()->route('servicioscontratados.index');
 

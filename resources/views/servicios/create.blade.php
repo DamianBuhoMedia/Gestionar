@@ -23,6 +23,22 @@
                           </div>
                       </div>
                     </div>
+                    <div class="panel-body align-lg-center">
+                    <div class="form-group">
+                        <label class="control-label">Dependencia</label>
+                        <div>
+                          <select  class="selectpicker form-control" name="dependencia">
+                              <option value=""> Seleccione una dependencia </option>
+
+                              @forelse($dependencias as $dependenciasitem)
+                                  <option value="{{$dependenciasitem->id}}">{{$dependenciasitem->nombre_dependencia}}</option>
+                              @empty
+                              No hay Productores
+                              @endforelse
+                          </select>
+                        </div>
+                    </div>
+                    </div>
                 </section>
 
                   <div class="form-group offset">

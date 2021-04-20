@@ -8,5 +8,5 @@ class Servicio extends Model
 {
     protected $table = "servicios";
     protected $primaryKey = "id_servicio";
-    protected $fillable = ['nombre_servicio'];
+    protected $fillable = ['nombre_servicio','dependencia'];
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Servicio;
 use Illuminate\Http\Request;
+use DB;
 
 class ServicioController extends Controller
 {
@@ -25,7 +26,12 @@ class ServicioController extends Controller
      */
     public function create()
     {
-        return view('servicios.create');
+      $dependencias = DB::select(
+        DB::raw("SELECT * FROM dependencias"));
+
+      return view('servicios.create',compact(
+          'dependencias'
+        ));
     }
 
     /**
@@ -37,7 +43,8 @@ class ServicioController extends Controller
     public function store(Request $request)
     {
         Servicio::create([
-          'nombre_servicio' =>  request('nombre')
+          'nombre_servicio' =>  request('nombre'),
+          'dependencia' =>  request('dependencia')
         ]);
 
         return redirect()->route('servicios.index');

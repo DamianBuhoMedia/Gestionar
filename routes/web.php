@@ -156,8 +156,8 @@ Route::post('paymentstore/','PaymentController@store')->name('payment.store');
 
 // Tramites nacion
 Route::get('nacion', 'TramitesNacionController@index')->name('nacion.index');
-
-
+Route::get('nacion/{id}', 'TramitesNacionController@edit')->name('nacion.edit');
+Route::patch('/nacion/{id}', 'TramitesNacionController@update')->name('nacion.update');
 
 
 Route::get("/page", function(){
