@@ -26,6 +26,7 @@
                             <table class="table table-striped" id="table-example">
                                 <thead>
                                     <tr>
+                                        <th  class="text-center">CUIT</th>
                                         <th  class="text-center">Razon Social</th>
                                         <th class="text-center">Telefono</th>
                                         <th class="text-center">Mail</th>
@@ -36,6 +37,7 @@
                                 <tbody align="center">
                                     @forelse($clientespotenciales as $clientespotencialesItem)
                                     <tr class="odd gradeX">
+                                        <td>{{$clientespotencialesItem['cuit_cliente']}}</td>
                                         <td>{{$clientespotencialesItem['razonsocial_cliente']}}</td>
                                         <td>{{$clientespotencialesItem['telefono_cliente']}}</td>
                                         <td>{{$clientespotencialesItem['mail_cliente']}}</td>

@@ -640,6 +640,19 @@
                       </form>
                   </section>
                   <section class="panel">
+                    <header class="panel-heading">
+                        <h4> Agenda </h4>
+                        @forelse($agenda as $itemagenda)
+                        <div class="nota">
+                          <p class="fecha">{{$itemagenda['recordar_nota']}}</p>
+                          <p class="mennsaje">{{$itemagenda['mensaje_nota']}}</p>
+
+                        </div>
+                        @empty
+                        No hay notas para mostrar
+                        @endforelse
+
+                    </header>
                       <header class="panel-heading">
                           <h4> Notas </h4>
                           @forelse($nota as $itemnota)

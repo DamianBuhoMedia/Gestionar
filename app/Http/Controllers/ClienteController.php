@@ -188,6 +188,14 @@ class ClienteController extends Controller
 				cliente__serviciocontratado = $id
         "));
 
+        $hoy = date("Y-m-d");
+        $agenda = Nota::select('*')
+        ->where('notas.cliente_nota', '=' , $id)
+        ->where('notas.recordar_nota', '>=' , $hoy)
+        ->orderBy('id_nota', 'desc')
+        ->get()
+        ->toArray();
+
       $nota = Nota::select('*')
       ->where('notas.cliente_nota', '=' , $id)
       ->orderBy('id_nota', 'desc')
@@ -200,7 +208,7 @@ class ClienteController extends Controller
         $iibb = Iibb::get();
         $productor = Productor::get();
         $user = auth()->user();
-        return view('clientes.edit', compact('cliente', 'iva', 'iibb', 'productor','join','nota','user','servicioscontratados'));
+        return view('clientes.edit', compact('cliente', 'iva', 'iibb', 'productor','join','nota','user','servicioscontratados', 'agenda'));
     }
 
     /**

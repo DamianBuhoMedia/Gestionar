@@ -424,6 +424,7 @@ class QuotesController extends Controller
             servicioscontratados.servicio_serviciocontratado,
             servicioscontratados.sub_servicio_serviciocontratado,
             servicioscontratados.servicio_detalle,
+            servicioscontratados.servicio_cantidad,
             servicios.nombre_servicio,
             subservicios.nombre_subservicio,
             servicioscontratados.cotizacion_serviciocontratado
@@ -434,6 +435,7 @@ class QuotesController extends Controller
             WHERE
             servicioscontratados.quote = $id
           "));
+
 
 
       $serviciosPadre = Servicio::get();
@@ -473,6 +475,7 @@ class QuotesController extends Controller
           ServicioContratado::create([
             'quote' => $id,
             'cliente__serviciocontratado' => request('cliente'),
+            'servicio_cantidad' => request('cantidad1'),
             'servicio_serviciocontratado' => request('servicio'),
             'sub_servicio_serviciocontratado' => request('subservicio'),
             'sub_servicio_serviciocontratado' => request('servicio_detalle'),
@@ -486,6 +489,7 @@ class QuotesController extends Controller
             'quote' => $id,
             'cliente__serviciocontratado' => request('cliente'),
             'servicio_serviciocontratado' => request('servicio2'),
+            'servicio_cantidad' => request('cantidad2'),
             'sub_servicio_serviciocontratado' => request('subservicio2'),
             'sub_servicio_serviciocontratado' => request('servicio_detalle2'),
             'cotizacion_serviciocontratado' => request('cotizacion2'),
@@ -498,6 +502,7 @@ class QuotesController extends Controller
             'quote' => $id,
             'cliente__serviciocontratado' => request('cliente'),
             'servicio_serviciocontratado' => request('servicio3'),
+            'servicio_cantidad' => request('cantidad3'),
             'sub_servicio_serviciocontratado' => request('subservicio3'),
             'sub_servicio_serviciocontratado' => request('servicio_detalle3'),
             'cotizacion_serviciocontratado' => request('cotizacion3'),
@@ -510,6 +515,7 @@ class QuotesController extends Controller
             'quote' => $id,
             'cliente__serviciocontratado' => request('cliente'),
             'servicio_serviciocontratado' => request('servicio4'),
+            'servicio_cantidad' => request('cantidad4'),
             'sub_servicio_serviciocontratado' => request('subservicio4'),
             'sub_servicio_serviciocontratado' => request('servicio_detalle4'),
             'cotizacion_serviciocontratado' => request('cotizacion4'),
@@ -522,6 +528,7 @@ class QuotesController extends Controller
             'quote' => $id,
             'cliente__serviciocontratado' => request('cliente'),
             'servicio_serviciocontratado' => request('servicio5'),
+            'servicio_cantidad' => request('cantidad5'),
             'sub_servicio_serviciocontratado' => request('subservicio5'),
             'sub_servicio_serviciocontratado' => request('servicio_detalle5'),
             'cotizacion_serviciocontratado' => request('cotizacion5'),
@@ -534,6 +541,7 @@ class QuotesController extends Controller
             'quote' => $id,
             'cliente__serviciocontratado' => request('cliente'),
             'servicio_serviciocontratado' => request('servicio6'),
+            'servicio_cantidad' => request('cantidad6'),
             'sub_servicio_serviciocontratado' => request('subservicio6'),
             'sub_servicio_serviciocontratado' => request('servicio_detalle6'),
             'cotizacion_serviciocontratado' => request('cotizacion6'),
@@ -546,6 +554,7 @@ class QuotesController extends Controller
             'quote' => $id,
             'cliente__serviciocontratado' => request('cliente'),
             'servicio_serviciocontratado' => request('servicio7'),
+            'servicio_cantidad' => request('cantidad7'),
             'sub_servicio_serviciocontratado' => request('subservicio7'),
             'sub_servicio_serviciocontratado' => request('servicio_detalle7'),
             'cotizacion_serviciocontratado' => request('cotizacion7'),
@@ -558,6 +567,7 @@ class QuotesController extends Controller
             'quote' => $id,
             'cliente__serviciocontratado' => request('cliente'),
             'servicio_serviciocontratado' => request('servicio8'),
+            'servicio_cantidad' => request('cantidad8'),
             'sub_servicio_serviciocontratado' => request('subservicio8'),
             'sub_servicio_serviciocontratado' => request('servicio_detalle8'),
             'cotizacion_serviciocontratado' => request('cotizacion8'),
@@ -570,6 +580,7 @@ class QuotesController extends Controller
             'quote' => $id,
             'cliente__serviciocontratado' => request('cliente'),
             'servicio_serviciocontratado' => request('servicio9'),
+            'servicio_cantidad' => request('cantidad9'),
             'sub_servicio_serviciocontratado' => request('subservicio9'),
             'sub_servicio_serviciocontratado' => request('servicio_detalle9'),
             'cotizacion_serviciocontratado' => request('cotizacion9'),
@@ -582,6 +593,7 @@ class QuotesController extends Controller
             'quote' => $id,
             'cliente__serviciocontratado' => request('cliente'),
             'servicio_serviciocontratado' => request('servicio10'),
+            'servicio_cantidad' => request('cantidad10'),
             'sub_servicio_serviciocontratado' => request('subservicio10'),
             'sub_servicio_serviciocontratado' => request('servicio_detalle10'),
             'cotizacion_serviciocontratado' => request('cotizacion10'),

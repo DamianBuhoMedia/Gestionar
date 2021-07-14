@@ -8,6 +8,7 @@ use App\Subservicio;
 use App\Potencial;
 use App\Productor;
 use App\Nota;
+use DB;
 
 class PotencialController extends Controller
 {
@@ -37,8 +38,9 @@ class PotencialController extends Controller
     public function create()
     {
         $productores = Productor::get();
-        $subservicios = Subservicio::get();
-        return view('clientes-potenciales-add', compact('productores','subservicios'));
+        $serviciosPadre = Servicio::get();
+        $servicios = Subservicio::get();
+        return view('clientes-potenciales-add', compact('productores','servicios','serviciosPadre'));
     }
 
     /**
@@ -50,17 +52,29 @@ class PotencialController extends Controller
     public function store(Request $request)
     {
 
-      Potencial::create([
-        'razonsocial_cliente' => request('razonsocial'),
-        'telefono_cliente' => request('telefono'),
-        'mail_cliente' => request('mailppal'),
-        'cargo_cliente' => request('cargo'),
-        'productor_cliente' => request('productor'),
-        'tramite_cliente' => request('tramite'),
-        'servicio_cliente' => request('servicio'),
-        'cotizacion_cliente' => request('cotizacion'),
-        'potencial_cliente' => '1'
-      ]);
+      $cuit = $request->cuit;
+      $calidacuit = DB::select(DB::raw("SELECT clientes.razonsocial_cliente, clientes.cuit_cliente FROM clientes WHERE clientes.cuit_cliente = $cuit"));
+
+        if($calidacuit){
+          echo "Este cuit ya esta ingresado en el sistema asignado a este Cliente: ";
+          echo $calidacuit[0]->razonsocial_cliente;
+          die();
+        }
+        else{
+          Potencial::create([
+            'razonsocial_cliente' => request('razonsocial'),
+            'cuit_cliente' => request('cuit'),
+            'telefono_cliente' => request('telefono'),
+            'mail_cliente' => request('mailppal'),
+            'cargo_cliente' => request('cargo'),
+            'productor_cliente' => request('productor'),
+            'tramite_cliente' => request('tramite'),
+            'servicio_cliente' => request('servicio'),
+            'cotizacion_cliente' => request('cotizacion'),
+            'potencial_cliente' => '1'
+          ]);
+        }
+
 
       return redirect()->route('clientes-potenciales');
 
@@ -111,6 +125,14 @@ class PotencialController extends Controller
       ->get()
       ->toArray();
 
+      $hoy = date("Y-m-d");
+      $agenda = Nota::select('*')
+      ->where('notas.cliente_nota', '=' , $id)
+      ->where('notas.recordar_nota', '>=' , $hoy)
+      ->orderBy('id_nota', 'desc')
+      ->get()
+      ->toArray();
+
       $subservicios = Subservicio::get();
 
       return view('potenciales.edit',[
@@ -118,6 +140,7 @@ class PotencialController extends Controller
         'productores' => Productor::get(),
         'user' => $user = auth()->user(),
         'nota' => $nota,
+        'agenda' => $agenda,
         'data' => $result,
         'subservicios' => $subservicios
       ]);

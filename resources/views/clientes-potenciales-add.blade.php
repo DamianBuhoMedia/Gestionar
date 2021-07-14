@@ -25,6 +25,12 @@ function OnSelectChange(event) {
                                 <input type="text" name="razonsocial" class="form-control" placeholder="Razon Social">
                             </div>
                         </div>
+                        <div class="form-group text-left">
+                            <label class="control-label">CUIT</label>
+                            <div>
+                                <input type="text" class="form-control" placeholder="CUIT" name="cuit">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="control-label">Telefono</label>
                             <div>
@@ -67,12 +73,16 @@ function OnSelectChange(event) {
                             <div class="form-group">
                               <label class="control-label">Servicio</label>
                               <div class="">
-                                <select  class="selectpicker form-control" id="servicios" name="servicio" data-size="10" data-live-search="true" onchange="OnSelectChange(this)">
-                                  @forelse($subservicios as $itemservicios)
-                                    <option data-price="{{$itemservicios['precio_subservicio']}}" value="{{$itemservicios['id_subservicio']}}">{{$itemservicios['nombre_subservicio']}}</option>
+                                <select  class="selectpicker form-control" id="servicios"  name="servicio">
+                                  @forelse($serviciosPadre as $itemservicios)
+                                    <option data-price="{{$itemservicios['precio_subservicio']}}" value="{{$itemservicios['id_servicio']}}" >{{$itemservicios['nombre_servicio']}}</option>
                                     @empty
                                       No hay resultados
                                   @endforelse
+                                </select>
+
+                                <select class="form-control" id="client"  name="subservicio" data-size="10" data-live-search="true" onchange="OnSelectChange(this)">
+                                  <option value="">Seleccione Un Servicio</option>
                                 </select>
                               </div>
                             </div>
@@ -106,7 +116,23 @@ function OnSelectChange(event) {
 
   </div>
   <!-- //main-->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $("#servicios").change(function(){
+        var selected = $(this).children("option:selected").val();
+        var type = $(this).val();
+        $.get('../getsubservicio/'+type, function(data){
+            console.log(data);
+            var producto_select = '<option value="">Seleccione una opcion</option>'
+              for (var i=0; i<data.length;i++)
+                producto_select+='<option  data-price="'+ data[i].precio_subservicio +'" value="'+data[i].id_subservicio+'" >'+data[i].nombre_subservicio+'</option>';
+              $("#client").html(producto_select);
+        });
+    });
+  });
 
+  </script>
 
 		<!-- //nav left menu-->
 </div>

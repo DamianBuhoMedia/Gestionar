@@ -1,36 +1,36 @@
 @extends('layouts.app')
 <script type="text/javascript">
 function OnSelectChange(event) {
-    document.getElementById('price').value = event.selectedOptions[0].getAttribute('data-price');
+    document.getElementById('price').value = (event.selectedOptions[0].getAttribute('data-price') * document.getElementById('cantidad1').value);
 }
 
 function OnSelectChange2(event) {
-    document.getElementById('price2').value = event.selectedOptions[0].getAttribute('data-price2');
+    document.getElementById('price2').value = (event.selectedOptions[0].getAttribute('data-price2') * document.getElementById('cantidad2').value);
 }
 
 function OnSelectChange3(event) {
-    document.getElementById('price3').value = event.selectedOptions[0].getAttribute('data-price3');
+    document.getElementById('price3').value = (event.selectedOptions[0].getAttribute('data-price3') * document.getElementById('cantidad3').value);
 }
 function OnSelectChange4(event) {
-    document.getElementById('price4').value = event.selectedOptions[0].getAttribute('data-price4');
+    document.getElementById('price4').value = (event.selectedOptions[0].getAttribute('data-price4') * document.getElementById('cantidad4').value);
 }
 function OnSelectChange5(event) {
-    document.getElementById('price5').value = event.selectedOptions[0].getAttribute('data-price5');
+    document.getElementById('price5').value = (event.selectedOptions[0].getAttribute('data-price5') * document.getElementById('cantidad5').value);
 }
 function OnSelectChange6(event) {
-    document.getElementById('price6').value = event.selectedOptions[0].getAttribute('data-price6');
+    document.getElementById('price6').value = (event.selectedOptions[0].getAttribute('data-price6') * document.getElementById('cantidad6').value);
 }
 function OnSelectChange7(event) {
-    document.getElementById('price7').value = event.selectedOptions[0].getAttribute('data-price7');
+    document.getElementById('price7').value = (event.selectedOptions[0].getAttribute('data-price7') * document.getElementById('cantidad7').value);
 }
 function OnSelectChange8(event) {
-    document.getElementById('price8').value = event.selectedOptions[0].getAttribute('data-price8');
+    document.getElementById('price8').value = (event.selectedOptions[0].getAttribute('data-price8') * document.getElementById('cantidad8').value);
 }
 function OnSelectChange9(event) {
-    document.getElementById('price9').value = event.selectedOptions[0].getAttribute('data-price9');
+    document.getElementById('price9').value = (event.selectedOptions[0].getAttribute('data-price9') * document.getElementById('cantidad9').value);
 }
 function OnSelectChange10(event) {
-    document.getElementById('price10').value = event.selectedOptions[0].getAttribute('data-price10');
+    document.getElementById('price10').value = (event.selectedOptions[0].getAttribute('data-price10') * document.getElementById('cantidad10').value);
 }
 </script>
 @section('content')
@@ -62,16 +62,19 @@ function OnSelectChange10(event) {
       																		<table class="table">
       																				<thead>
       																						<tr>
-      																								<th style="width:4%">#</th>
-      																								<th  style="width:37%">Servicios</th>
-      																								<th  style="width:37%">Subservicio</th>
-      																								<th  style="width:20%">Cotizacion</th>
-                                                      <th  style="width:20%">detalle</th>
+                                                    <th  style="width:4%">#</th>
+                                                    <th  style="width:4%">Cantidad</th>
+                                                    <th  style="width:35%">Servicios</th>
+                                                    <th  style="width:35%">Subservicio</th>
+                                                    <th  style="width:20%">Cotizacion</th>
+                                                    <th  style="width:20%">detalle</th>
+                                                </tr>
       																						</tr>
       																				</thead>
       																				<tbody align="">
       																						<tr>
       																								<td>1</td>
+                                                      <td><input type="number" name="cantidad1"  id="cantidad1" <?php if (isset($itemquotes[0]->servicio_cantidad)): ?>  value="{{$itemquotes[0]->servicio_cantidad}}"  <?php endif; ?>  class="form-control" required > </td>
       																								<td>
                                                         <select  class="selectpicker form-control" id="servicios"  name="servicio" style="padding-bottom:5px" required>
                                                           <?php if (isset($itemquotes[0])): ?>
@@ -106,6 +109,7 @@ function OnSelectChange10(event) {
       																						</tr>
                                                   <tr>
       																								<td>2</td>
+                                                      <td><input type="text" name="cantidad2" id="cantidad2" <?php if (isset($itemquotes[1]->servicio_cantidad)): ?>  value="{{$itemquotes[1]->servicio_cantidad}}"  <?php endif; ?> class="form-control"  > </td>
       																								<td>
                                                         <select  class="selectpicker form-control" id="servicios2"  name="servicio2" style="padding-bottom:5px">
                                                           <?php if (isset($itemquotes[1])): ?>
@@ -141,6 +145,7 @@ function OnSelectChange10(event) {
 
                                                   <tr>
       																								<td>3</td>
+                                                      <td><input type="text" name="cantidad3" id="cantidad3" <?php if (isset($itemquotes[2]->servicio_cantidad)): ?>  value="{{$itemquotes[2]->servicio_cantidad}}"  <?php endif; ?> class="form-control"  > </td>
       																								<td>
                                                         <select  class="selectpicker form-control" id="servicios3"  name="servicio3" style="padding-bottom:5px">
                                                           <?php if (isset($itemquotes[2])): ?>
@@ -175,6 +180,7 @@ function OnSelectChange10(event) {
       																						</tr>
                                                   <tr>
       																								<td>4</td>
+                                                      <td><input type="text" name="cantidad4" id="cantidad4" <?php if (isset($itemquotes[3]->servicio_cantidad)): ?>  value="{{$itemquotes[3]->servicio_cantidad}}"  <?php endif; ?> class="form-control"  > </td>
       																								<td>
                                                         <select  class="selectpicker form-control" id="servicios4"  name="servicio4" style="padding-bottom:5px">
                                                           <?php if (isset($itemquotes[3])): ?>
@@ -209,6 +215,7 @@ function OnSelectChange10(event) {
       																						</tr>
                                                   <tr>
                                                       <td>5</td>
+                                                      <td><input type="text" name="cantidad5" id="cantidad5" <?php if (isset($itemquotes[4]->servicio_cantidad)): ?>  value="{{$itemquotes[4]->servicio_cantidad}}"  <?php endif; ?> class="form-control"  > </td>
                                                       <td>
                                                         <select  class="selectpicker form-control" id="servicios5"  name="servicio5" style="padding-bottom:5px">
                                                           <?php if (isset($itemquotes[4])): ?>
@@ -243,6 +250,7 @@ function OnSelectChange10(event) {
                                                   </tr>
                                                   <tr>
                                                       <td>6</td>
+                                                      <td><input type="text" name="cantidad6" id="cantidad6" <?php if (isset($itemquotes[5]->servicio_cantidad)): ?>  value="{{$itemquotes[5]->servicio_cantidad}}"  <?php endif; ?> class="form-control"  > </td>
                                                       <td>
                                                         <select  class="selectpicker form-control" id="servicios6"  name="servicio6" style="padding-bottom:5px">
                                                           <?php if (isset($itemquotes[5])): ?>
@@ -277,6 +285,7 @@ function OnSelectChange10(event) {
                                                   </tr>
                                                   <tr>
                                                       <td>7</td>
+                                                      <td><input type="text" name="cantidad7" id="cantidad7" <?php if (isset($itemquotes[6]->servicio_cantidad)): ?>  value="{{$itemquotes[6]->servicio_cantidad}}"  <?php endif; ?> class="form-control"  > </td>
                                                       <td>
                                                         <select  class="selectpicker form-control" id="servicios7"  name="servicio7" style="padding-bottom:5px">
                                                           <?php if (isset($itemquotes[6])): ?>
@@ -311,6 +320,7 @@ function OnSelectChange10(event) {
                                                   </tr>
                                                   <tr>
                                                       <td>8</td>
+                                                      <td><input type="text" name="cantidad8" id="cantidad8" <?php if (isset($itemquotes[7]->servicio_cantidad)): ?>  value="{{$itemquotes[7]->servicio_cantidad}}"  <?php endif; ?> class="form-control"  > </td>
                                                       <td>
                                                         <select  class="selectpicker form-control" id="servicios8"  name="servicio8" style="padding-bottom:5px">
                                                           <?php if (isset($itemquotes[7])): ?>
@@ -345,6 +355,7 @@ function OnSelectChange10(event) {
                                                   </tr>
                                                   <tr>
                                                       <td>9</td>
+                                                      <td><input type="text" name="cantidad9"  id="cantidad9" <?php if (isset($itemquotes[8]->servicio_cantidad)): ?>  value="{{$itemquotes[8]->servicio_cantidad}}"  <?php endif; ?> class="form-control"  > </td>
                                                       <td>
                                                         <select  class="selectpicker form-control" id="servicios9"  name="servicio9" style="padding-bottom:5px">
                                                           <?php if (isset($itemquotes[8])): ?>
@@ -379,6 +390,7 @@ function OnSelectChange10(event) {
                                                   </tr>
                                                   <tr>
                                                       <td>10</td>
+                                                      <td><input type="text" name="cantidad10" id="cantidad10" <?php if (isset($itemquotes[9]->servicio_cantidad)): ?>  value="{{$itemquotes[9]->servicio_cantidad}}"  <?php endif; ?> class="form-control"  > </td>
                                                       <td>
                                                         <select  class="selectpicker form-control" id="servicios10"  name="servicio10" style="padding-bottom:5px">
                                                           <?php if (isset($itemquotes[9])): ?>
